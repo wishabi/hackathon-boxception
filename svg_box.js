@@ -1,11 +1,12 @@
-// TODO: make non event handler methods not-static?
+// TODO:
+// -figure out how to emit events instead of having to pass in the controller
 
 class Box {
-  constructor(width, height, draw) {
+  constructor(width, height, draw, controller) {
     var self = this
 
-    // Save svg parent and create svg
     self.draw = draw
+    self.controller = controller
 
     // Create svg and save
     self.svg_e = draw.rect(width, height).fill('#f06')
@@ -70,6 +71,7 @@ class Box {
 
   static onclick(self, event) {
     console.log("onclick: ", event)
+    self.controller.box_clicked(self)
   }
 }
 

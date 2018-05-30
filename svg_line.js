@@ -1,8 +1,7 @@
 class Line {
-  constructor(box1, box2, draw) {
+  constructor(box1, box2, draw,) {
     var self = this
 
-    // Save svg parent and create svg
     self.draw = draw
 
     box1.add_line(self)
@@ -33,17 +32,17 @@ class Line {
   
   get_left_box() {
     if (this.box1.x() <= this.box2.x()) {
-      return box1
+      return this.box1
     } else {
-      return box2
+      return this.box2
     }
   }
 
   get_right_box() {
     if (this.box1.x() <= this.box2.x()) {
-      return box2
+      return this.box2
     } else {
-      return box1
+      return this.box1
     }
   }
 
