@@ -1,9 +1,8 @@
 // initialize SVG.js
-var draw = SVG('drawing')
+var draw = SVG('drawing').size(750, 400)
+draw.rect(750, 750).fill('#EBEDEF')
 
-// draw pink square
-var rect = draw.rect(200, 100).fill('#f06')
-rect.dx(50)
-rect.dx(50)
-rect.dy(50)
-rect.draggable()
+var b1 = new Box(100, 50, draw)
+
+var b2 = new Box(100, 50, draw)
+b2.svg_e.move(100, 100)
