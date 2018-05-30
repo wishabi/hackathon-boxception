@@ -11,6 +11,8 @@ class Box {
     self.svg_e = draw.rect(width, height).fill('#f06')
     self.svg_e.draggable()
 
+    self.lines = []
+
     // Register event handlers
     self.svg_e.on('dragend', function(event) {
       Box.dragend(self, event)
@@ -49,10 +51,21 @@ class Box {
     return {x: x, y: y}
   }
 
+  add_line(line) {
+    this.lines.push(line)
+  }
+
+  redraw_lines() {
+    this.lines.forEach(function(line) {
+      line.draw_line()
+    })
+  }
+
   // Event handlers
   static dragend(self, event) {
     console.log("dragend: " + self.svg_e.x() + ", " + self.svg_e.y())
     console.log(self)
+    self.redraw_lines()
   }
 
   static onclick(self, event) {

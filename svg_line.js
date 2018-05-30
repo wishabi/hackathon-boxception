@@ -5,6 +5,9 @@ class Line {
     // Save svg parent and create svg
     self.draw = draw
 
+    box1.add_line(self)
+    box2.add_line(self)
+
     self.box1 = box1
     self.box2 = box2
 
@@ -12,6 +15,10 @@ class Line {
   }
 
   draw_line() {
+    if (typeof this.svg_e == 'object') {
+      this.svg_e.remove()
+    }
+
     var left_box = this.get_left_box()
     var right_box = this.get_right_box()
 
