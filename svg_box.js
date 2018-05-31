@@ -1,12 +1,27 @@
+const colours = [
+  '#2191FB',
+  '#BA274A',
+  '#011627',
+  '#44FFD1',
+  '#6153CC',
+  '#FF423F',
+]
+var colours_index = 0
+
+function get_colour() {
+  var colour = colours[colours_index % colours.length]
+  colours_index += 1
+  return colour
+}
+
 class Box {
-  constructor(width, height, draw, depth=1) {
+  constructor(width, height, draw) {
     var self = this
 
     self.draw = draw
-    self.depth = depth
 
     // Create svg and save
-    self.svg_e = draw.rect(width, height).fill('#f06')
+    self.svg_e = draw.rect(width, height).fill(get_colour())
     self.svg_e.draggable()
 
     self.lines = []
