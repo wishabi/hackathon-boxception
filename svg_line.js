@@ -1,5 +1,5 @@
 class Line {
-  constructor(box1, box2, draw,) {
+  constructor(box1, box2, draw) {
     var self = this
 
     self.draw = draw

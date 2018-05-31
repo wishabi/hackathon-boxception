@@ -1,12 +1,9 @@
-// TODO:
-// -figure out how to emit events instead of having to pass in the controller
-
 class Box {
-  constructor(width, height, draw, controller) {
+  constructor(width, height, draw, depth=1) {
     var self = this
 
     self.draw = draw
-    self.controller = controller
+    self.depth = depth
 
     // Create svg and save
     self.svg_e = draw.rect(width, height).fill('#f06')
@@ -70,8 +67,8 @@ class Box {
   }
 
   static onclick(self, event) {
-    console.log("onclick: ", event)
-    self.controller.box_clicked(self)
+    console.log("Box.onclick: ", event)
+    EE.trigger('box_clicked', [self])
   }
 }
 
