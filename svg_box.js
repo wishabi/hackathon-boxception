@@ -5,6 +5,11 @@ const colours = [
   '#44FFD1',
   '#6153CC',
   '#FF423F',
+  '#32213A',
+  '#32213A',
+  '#D4D6B9',
+  '#124559',
+  '#F90093'
 ]
 var colours_index = 0
 
