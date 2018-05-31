@@ -19,50 +19,52 @@ class Box {
     var self = this
 
     self.draw = draw
+    self.width = width
+    self.height = height
 
     // Create svg and save
-    self.svg_e = draw.group()
-    self.svg_e.rect(width, height).fill(get_colour())
-    // self.svg_e.rect(width / 2, height / 2).fill(get_colour()).draggable()
-    self.svg_e.draggable()
+    self.svg_group = draw.group()
+    self.svg_group.rect(width, height).fill(get_colour())
+    // self.svg_group.rect(width / 2, height / 2).fill(get_colour()).draggable()
+    self.svg_group.draggable()
 
     self.lines = []
 
     // Register event handlers
-    self.svg_e.on('dragend', function(event) {
+    self.svg_group.on('dragend', function(event) {
       Box.dragend(self, event)
     })
 
-    self.svg_e.click(function(event) {
+    self.svg_group.click(function(event) {
       Box.onclick(self, event)
     })
 
-    // self.svg_e.on('mouseover', function(event) {
+    // self.svg_group.on('mouseover', function(event) {
     //   console.log('mouseover')
     // })
 
-    // self.svg_e.on('mouseout', function(event) {
+    // self.svg_group.on('mouseout', function(event) {
     //   console.log('mouseout')
     // })
   }
 
   x() {
-    return this.svg_e.x()
+    return this.svg_group.x()
   }
 
   y() {
-    return this.svg_e.y()
+    return this.svg_group.y()
   }
 
   get_left_center() {
-    var x = this.svg_e.x()
-    var y = this.svg_e.y() + (this.svg_e.height() / 2)
+    var x = this.x()
+    var y = this.y() + (this.height / 2)
     return {x: x, y: y}
   }
 
   get_right_center() {
-    var x = this.svg_e.x() + this.svg_e.width()
-    var y = this.svg_e.y() + (this.svg_e.height() / 2)
+    var x = this.x() + this.width
+    var y = this.y() + (this.height / 2)
     return {x: x, y: y}
   }
 
@@ -76,9 +78,15 @@ class Box {
     })
   }
 
+  add_sub_box() {
+    var box = new Box(this.width / 5, this.height / 5, this.svg_group)
+    box.svg_group.addTo(this.svg_group)
+    return box
+  }
+
   // Event handlers
   static dragend(self, event) {
-    console.log("dragend: " + self.svg_e.x() + ", " + self.svg_e.y())
+    console.log("dragend: " + self.svg_group.x() + ", " + self.svg_group.y())
     console.log(self)
     self.redraw_lines()
   }

@@ -18,11 +18,22 @@ class Controller {
   }
 
   add_box(width, height) {
-    var box = new Box(width, height, this.draw)
-    if (this.draw_depth in this.depth_to_boxes) {
-      this.depth_to_boxes[this.draw_depth].push(box)
-    } else {
-      this.depth_to_boxes[this.draw_depth] = [box]
+    if (this.draw_depth == 1) {
+      var box = new Box(width, height, this.draw)
+      if (this.draw_depth in this.depth_to_boxes) {
+        this.depth_to_boxes[this.draw_depth].push(box)
+      } else {
+        this.depth_to_boxes[this.draw_depth] = [box]
+      }
+    }
+
+    if (this.draw_depth == 2) {
+      var box = this.last_selected_box.add_sub_box()
+      if (this.draw_depth in this.depth_to_boxes) {
+        this.depth_to_boxes[this.draw_depth].push(box)
+      } else {
+        this.depth_to_boxes[this.draw_depth] = [box]
+      }
     }
   }
 
