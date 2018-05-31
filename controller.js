@@ -41,17 +41,22 @@ class Controller {
   static update_draw_depth(self, box_height) {
     console.log("update_draw_depth, box_height:", box_height)
 
-    if (box_height <= 200) {
+    var level2boxes = self.depth_to_boxes[2]
+    if (box_height <= 250) {
       self.draw_depth = 2
 
-      self.depth_to_boxes[2].forEach(function(box) {
-        box.svg_group.show()
-      });
+      if (typeof level2boxes !== 'undefined') {
+        level2boxes.forEach(function(box) {
+          box.svg_group.show()
+        });
+      }
     } else {
       self.draw_depth = 1
-      self.depth_to_boxes[2].forEach(function(box) {
-        box.svg_group.hide()
-      });
+      if (typeof level2boxes !== 'undefined') {
+        level2boxes.forEach(function(box) {
+          box.svg_group.hide()
+        });
+      }
     }
 
     console.log("draw_depth:", self.draw_depth)
