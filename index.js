@@ -20,8 +20,3 @@ document.querySelector("#add_line").onclick = function() {
 document.querySelector("#reset_zoom").onclick = function() {
   draw.zoom(1)
 }
-
-draw.on('zoom', function(ev) {
-  console.log("Box", ev.detail.box)
-  console.log("Focus", ev.detail.focus)
-})

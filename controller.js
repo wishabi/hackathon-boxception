@@ -6,10 +6,14 @@ class Controller {
     self.box2 = null
     self.create_line = false
     self.draw_depth = 1
-
     self.depth_to_boxes = {}
 
     EE.on('box_clicked', Controller.box_clicked(self));
+
+    self.draw.on('zoom', function(ev) {
+      // console.log(ev)
+      Controller.update_draw_depth(self, ev.detail.box.height)
+    })
   }
 
   add_box(width, height) {
@@ -19,6 +23,19 @@ class Controller {
     } else {
       this.depth_to_boxes[this.draw_depth] = [box]
     }
+  }
+
+  // hacky: update draw depth based on viewbox height
+  static update_draw_depth(self, box_height) {
+    console.log("update_draw_depth, box_height:", box_height)
+
+    if (box_height <= 200) {
+      self.draw_depth = 2
+    } else {
+      self.draw_depth = 1
+    }
+
+    console.log("draw_depth:", self.draw_depth)
   }
 
   static box_clicked(self, box) {
