@@ -4,7 +4,7 @@ var width = 750
 var height = 500
 const draw = SVG('drawing')
   .size(width, height)
-  .panZoom({zoomMin: 0.5, zoomMax: 20, zoomFactor: 0.25})
+  .panZoom({zoomMin: 0.5, zoomMax: 100, zoomFactor: 0.5})
 
 c = new Controller(draw)
 

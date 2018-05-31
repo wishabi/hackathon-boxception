@@ -27,7 +27,7 @@ class Controller {
       }
     }
 
-    if (this.draw_depth == 2) {
+    if (this.draw_depth > 1) {
       var box = this.last_selected_box.add_sub_box()
       if (this.draw_depth in this.depth_to_boxes) {
         this.depth_to_boxes[this.draw_depth].push(box)
@@ -37,27 +37,41 @@ class Controller {
     }
   }
 
-  // hacky: update draw depth based on viewbox height
+  // update draw depth based on viewbox height
   static update_draw_depth(self, box_height) {
     console.log("update_draw_depth, box_height:", box_height)
 
-    var level2boxes = self.depth_to_boxes[2]
-    if (box_height <= 250) {
-      self.draw_depth = 2
-
-      if (typeof level2boxes !== 'undefined') {
-        level2boxes.forEach(function(box) {
-          box.svg_group.show()
-        });
-      }
-    } else {
+    // Update draw depth
+    if (box_height > 250) {
       self.draw_depth = 1
-      if (typeof level2boxes !== 'undefined') {
-        level2boxes.forEach(function(box) {
-          box.svg_group.hide()
-        });
-      }
+    } else if (box_height <= 250 && box_height > 50) {
+      self.draw_depth = 2
+    } else {
+      self.draw_depth = 3
     }
+
+    // Show current depth
+    var boxes = self.depth_to_boxes[self.draw_depth]
+    if (typeof boxes !== 'undefined') {
+      boxes.forEach(function(box) {
+        box.svg_group.show()
+      })
+    }
+
+    // Hide boxes
+    var depth_nums = _.map(Object.keys(self.depth_to_boxes), function(index) {
+      return parseInt(index)
+    }).sort()
+    depth_nums = _.filter(depth_nums, function(depth) {
+      return depth > self.draw_depth
+    })
+
+    depth_nums.forEach(function(depth) {
+      self.depth_to_boxes[depth].forEach(function(box) {
+        box.svg_group.hide()
+      })
+    })
+
 
     console.log("draw_depth:", self.draw_depth)
   }

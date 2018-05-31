@@ -99,6 +99,7 @@ class Box {
 
   static onclick(self, event) {
     console.log("Box.onclick: ", event)
+    event.stopPropagation()
     EE.trigger('box_clicked', [self])
   }
 }
