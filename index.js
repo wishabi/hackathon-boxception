@@ -7,7 +7,6 @@ const draw = SVG('drawing')
   .panZoom({zoomMin: 0.5, zoomMax: 20, zoomFactor: 0.25})
 
 c = new Controller(draw)
-c.add_box(200, 100)
 
 document.querySelector("#add_box").onclick = function() {
   c.add_box(200, 100)

@@ -28,6 +28,12 @@ class Box {
     // self.svg_group.rect(width / 2, height / 2).fill(get_colour()).draggable()
     self.svg_group.draggable()
 
+    var title = prompt("Enter box title.")
+    self.title = title
+    self.svg_group.text(title).fill(get_colour()).font({
+      size: self.height / 10
+    })
+
     self.lines = []
 
     // Register event handlers
