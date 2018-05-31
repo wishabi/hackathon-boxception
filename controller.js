@@ -2,6 +2,7 @@ class Controller {
   constructor(draw) {
     var self = this
     self.draw = draw
+    self.last_selected_box = null
     self.box1 = null
     self.box2 = null
     self.create_line = false
@@ -41,6 +42,9 @@ class Controller {
   static box_clicked(self, box) {
     return function(box) {
       console.log("Controller.box_clicked!", box)
+
+      self.last_selected_box = box
+
       if (self.create_line) {
         if (self.box1 == null) {
           self.box1 = box

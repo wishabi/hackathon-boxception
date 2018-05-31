@@ -21,7 +21,9 @@ class Box {
     self.draw = draw
 
     // Create svg and save
-    self.svg_e = draw.rect(width, height).fill(get_colour())
+    self.svg_e = draw.group()
+    self.svg_e.rect(width, height).fill(get_colour())
+    // self.svg_e.rect(width / 2, height / 2).fill(get_colour()).draggable()
     self.svg_e.draggable()
 
     self.lines = []
