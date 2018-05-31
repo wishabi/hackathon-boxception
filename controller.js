@@ -43,8 +43,15 @@ class Controller {
 
     if (box_height <= 200) {
       self.draw_depth = 2
+
+      self.depth_to_boxes[2].forEach(function(box) {
+        box.svg_group.show()
+      });
     } else {
       self.draw_depth = 1
+      self.depth_to_boxes[2].forEach(function(box) {
+        box.svg_group.hide()
+      });
     }
 
     console.log("draw_depth:", self.draw_depth)
