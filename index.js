@@ -7,10 +7,10 @@ const draw = SVG('drawing')
   .panZoom({zoomMin: 0.5, zoomMax: 20, zoomFactor: 0.25})
 
 c = new Controller(draw)
-var b = new Box(200, 100, draw)
+c.add_box(200, 100)
 
 document.querySelector("#add_box").onclick = function() {
-  new Box(200, 100, draw)
+  c.add_box(200, 100)
 }
 
 document.querySelector("#add_line").onclick = function() {
@@ -20,3 +20,8 @@ document.querySelector("#add_line").onclick = function() {
 document.querySelector("#reset_zoom").onclick = function() {
   draw.zoom(1)
 }
+
+draw.on('zoom', function(ev) {
+  console.log("Box", ev.detail.box)
+  console.log("Focus", ev.detail.focus)
+})

@@ -25,8 +25,8 @@ class Line {
     var line_right = right_box.get_left_center()
 
     this.svg_e = this.draw.line(
-      line_left['x'], line_left['y'],
-      line_right['x'], line_right['y']
+      line_left.x, line_left.y,
+      line_right.x, line_right.y
     ).stroke({ width: 1})
   }
   
